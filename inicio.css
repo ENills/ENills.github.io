@@ -1,0 +1,1051 @@
+/* =========================================
+CONFIGURACIÓN GENERAL
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+html,
+body {
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+
+body {
+background: #080808;
+color: white;
+font-family: "Courier New", monospace;
+}
+
+/* =========================================
+ESCENAS
+========================================= */
+
+.scene {
+position: fixed;
+inset: 0;
+
+width: 100%;
+height: 100%;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+background-image:
+    linear-gradient(
+        rgba(0, 0, 0, 0.48),
+        rgba(0, 0, 0, 0.68)
+    ),
+    url("Imagenes/Inicio.jpg");
+
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+
+overflow: hidden;
+
+}
+
+.scene::before {
+content: "";
+
+position: absolute;
+inset: 0;
+
+background-image:
+    linear-gradient(
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px
+    );
+
+background-size: 8px 8px;
+
+pointer-events: none;
+
+z-index: 1;
+
+}
+
+.scene.hidden {
+display: none;
+}
+
+.scene.active {
+display: flex;
+}
+
+/* =========================================
+CONTENEDOR
+========================================= */
+
+.loading-container {
+position: relative;
+z-index: 5;
+
+width: min(92%, 620px);
+
+text-align: center;
+
+padding: 25px;
+
+}
+
+/* =========================================
+LOGO MINECRAFT
+========================================= */
+
+.minecraft-logo {
+
+font-family:
+    Impact,
+    "Arial Black",
+    sans-serif;
+
+font-size:
+    clamp(45px, 12vw, 90px);
+
+letter-spacing: 3px;
+
+color: #eeeeee;
+
+text-shadow:
+    5px 5px 0 #111,
+    3px 3px 0 #222,
+    -2px -2px 0 #777;
+
+margin-bottom: 10px;
+
+animation:
+    logoFloat 3s ease-in-out infinite;
+
+}
+
+.minecraft-logo.small {
+
+font-size:
+    clamp(32px, 8vw, 58px);
+
+margin-bottom: 25px;
+
+}
+
+@keyframes logoFloat {
+
+0% {
+    transform: translateY(0);
+}
+
+50% {
+    transform: translateY(-4px);
+}
+
+100% {
+    transform: translateY(0);
+}
+
+}
+
+/* =========================================
+FRASE DE SORPRESA
+========================================= */
+
+#splash-text {
+
+display: inline-block;
+
+margin-bottom: 35px;
+
+padding: 5px 12px;
+
+color: #ffff55;
+
+font-size:
+    clamp(13px, 3.5vw, 18px);
+
+font-weight: bold;
+
+text-shadow:
+    2px 2px 0 #3f3f00;
+
+transform: rotate(-3deg);
+
+animation:
+    splashAnimation 2.5s ease-in-out infinite;
+
+}
+
+@keyframes splashAnimation {
+
+0% {
+    transform: rotate(-3deg) scale(1);
+}
+
+50% {
+    transform: rotate(-3deg) scale(1.05);
+}
+
+100% {
+    transform: rotate(-3deg) scale(1);
+}
+
+}
+
+/* =========================================
+TÍTULO
+========================================= */
+
+#loading-title {
+
+font-size:
+    clamp(19px, 5vw, 31px);
+
+letter-spacing: 2px;
+
+margin-bottom: 18px;
+
+text-shadow:
+    3px 3px 0 #000;
+
+}
+
+/* =========================================
+MENSAJE
+========================================= */
+
+#loading-message {
+
+min-height: 25px;
+
+font-size:
+    clamp(14px, 4vw, 18px);
+
+color: #cfcfcf;
+
+margin-bottom: 22px;
+
+text-shadow:
+    2px 2px 0 #000;
+
+transition:
+    opacity 0.2s ease;
+
+}
+
+/* =========================================
+BARRA
+========================================= */
+
+.progress-box {
+
+width: 100%;
+
+height: 34px;
+
+background: #111;
+
+border: 4px solid #555;
+
+box-shadow:
+    inset 0 0 0 3px #222,
+    5px 5px 0 #000;
+
+padding: 4px;
+
+}
+
+#progress-bar {
+
+position: relative;
+
+width: 0%;
+
+height: 100%;
+
+overflow: hidden;
+
+background:
+    repeating-linear-gradient(
+        90deg,
+        #63c43d 0px,
+        #63c43d 12px,
+        #4d9f30 12px,
+        #4d9f30 24px
+    );
+
+transition:
+    width 0.45s ease;
+
+box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.25);
+
+}
+
+/* =========================================
+BRILLO
+========================================= */
+
+.progress-shine {
+
+position: absolute;
+
+top: 0;
+left: -40%;
+
+width: 40%;
+height: 100%;
+
+background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+
+animation:
+    progressShine 1.5s linear infinite;
+
+}
+
+@keyframes progressShine {
+
+from {
+    left: -40%;
+}
+
+to {
+    left: 120%;
+}
+
+}
+
+/* =========================================
+PORCENTAJE
+========================================= */
+
+#progress-text {
+
+margin-top: 12px;
+
+font-size: 16px;
+
+color: #eeeeee;
+
+text-shadow:
+    2px 2px 0 #000;
+
+}
+
+/* =========================================
+BUSCANDO JUGADOR
+========================================= */
+
+.player-search {
+
+margin-top: 25px;
+
+min-height: 45px;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+gap: 10px;
+
+color: #ffffff;
+
+font-size:
+    clamp(14px, 4vw, 18px);
+
+text-shadow:
+    2px 2px 0 #000;
+
+}
+
+.search-icon {
+
+color: #ffff55;
+
+animation:
+    searchPulse 1s infinite;
+
+}
+
+@keyframes searchPulse {
+
+0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+}
+
+50% {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+}
+
+}
+
+/* =========================================
+BOTONES
+========================================= */
+
+.minecraft-button {
+
+margin-top: 30px;
+
+min-width: 270px;
+
+padding: 15px 25px;
+
+border: 4px solid #222;
+
+background:
+    linear-gradient(
+        #777,
+        #555
+    );
+
+color: white;
+
+font-family:
+    "Courier New",
+    monospace;
+
+font-size: 18px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+text-shadow:
+    2px 2px 0 #222;
+
+box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.2),
+    inset 0 -4px rgba(0, 0, 0, 0.25),
+    5px 5px 0 #000;
+
+transition:
+    transform 0.1s,
+    filter 0.15s,
+    box-shadow 0.1s;
+
+}
+
+.minecraft-button:hover {
+filter: brightness(1.25);
+}
+
+.minecraft-button:active {
+
+transform:
+    translate(3px, 3px);
+
+box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.2),
+    inset 0 -2px rgba(0, 0, 0, 0.25),
+    2px 2px 0 #000;
+
+}
+
+/* =========================================
+BOTÓN FINAL
+========================================= */
+
+#enter-button:not(.hidden) {
+
+animation:
+    buttonAppear 0.7s ease forwards;
+
+}
+
+@keyframes buttonAppear {
+
+from {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+}
+
+/* =========================================
+PARTÍCULAS
+========================================= */
+
+#particles {
+
+position: fixed;
+
+inset: 0;
+
+z-index: 3;
+
+pointer-events: none;
+
+overflow: hidden;
+
+}
+
+.particle {
+
+position: absolute;
+
+width: 3px;
+height: 3px;
+
+background:
+    rgba(255, 255, 255, 0.35);
+
+box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.2);
+
+animation:
+    particleFloat linear infinite;
+
+}
+
+@keyframes particleFloat {
+
+from {
+
+    transform:
+        translateY(110vh)
+        translateX(0);
+
+    opacity: 0;
+}
+
+15% {
+    opacity: 0.7;
+}
+
+85% {
+    opacity: 0.7;
+}
+
+to {
+
+    transform:
+        translateY(-10vh)
+        translateX(30px);
+
+    opacity: 0;
+}
+
+}
+
+/* =========================================
+PANTALLA DE NOMBRE
+========================================= */
+
+.overlay {
+
+position: fixed;
+
+inset: 0;
+
+z-index: 50;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+padding: 20px;
+
+background:
+    rgba(0, 0, 0, 0.72);
+
+animation:
+    overlayAppear 0.35s ease;
+
+}
+
+@keyframes overlayAppear {
+
+from {
+    opacity: 0;
+}
+
+to {
+    opacity: 1;
+}
+
+}
+
+/* =========================================
+CAJA DEL NOMBRE
+========================================= */
+
+.name-box {
+
+width: min(92%, 480px);
+
+padding: 30px 25px;
+
+text-align: center;
+
+background:
+    linear-gradient(
+        #303030,
+        #202020
+    );
+
+border: 5px solid #555;
+
+box-shadow:
+    inset 0 0 0 4px #181818,
+    8px 8px 0 #000;
+
+animation:
+    nameBoxAppear 0.45s ease;
+
+}
+
+@keyframes nameBoxAppear {
+
+from {
+    opacity: 0;
+    transform: scale(0.9) translateY(15px);
+}
+
+to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+}
+
+.name-icon {
+
+color: #ffff55;
+
+font-size: 28px;
+
+margin-bottom: 12px;
+
+animation:
+    searchPulse 1.5s infinite;
+
+}
+
+.name-box h2 {
+
+font-size:
+    clamp(18px, 5vw, 25px);
+
+margin-bottom: 14px;
+
+text-shadow:
+    3px 3px 0 #000;
+
+}
+
+.name-box p {
+
+color: #cfcfcf;
+
+font-size:
+    clamp(13px, 3.5vw, 16px);
+
+line-height: 1.5;
+
+margin-bottom: 20px;
+
+}
+
+/* =========================================
+INPUT
+========================================= */
+
+#player-name {
+
+width: 100%;
+
+padding: 14px;
+
+border: 4px solid #222;
+
+outline: none;
+
+background: #111;
+
+color: white;
+
+font-family:
+    "Courier New",
+    monospace;
+
+font-size: 17px;
+
+text-align: center;
+
+box-shadow:
+    inset 3px 3px 0 #000,
+    inset -2px -2px 0 #444;
+
+}
+
+#player-name::placeholder {
+color: #888;
+}
+
+#player-name:focus {
+
+border-color: #777;
+
+background: #151515;
+
+}
+
+/* =========================================
+PANTALLA DE BIENVENIDA
+========================================= */
+
+.welcome-screen {
+
+position: fixed;
+
+inset: 0;
+
+z-index: 80;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+background:
+    rgba(0, 0, 0, 0.82);
+
+animation:
+    welcomeAppear 0.5s ease;
+
+}
+
+@keyframes welcomeAppear {
+
+from {
+    opacity: 0;
+}
+
+to {
+    opacity: 1;
+}
+
+}
+
+.welcome-message {
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 20px;
+
+width: 90%;
+
+text-align: center;
+
+}
+
+#welcome-text {
+
+font-family:
+    "Courier New",
+    monospace;
+
+font-size:
+    clamp(22px, 6vw, 38px);
+
+color: white;
+
+line-height: 1.4;
+
+text-shadow:
+    4px 4px 0 #000,
+    0 0 12px rgba(255, 255, 255, 0.25);
+
+animation:
+    welcomeText 1.2s ease forwards;
+
+}
+
+.welcome-particle {
+
+color: #ffff55;
+
+font-size: 24px;
+
+animation:
+    welcomeParticle 1.2s ease-in-out infinite;
+
+}
+
+@keyframes welcomeText {
+
+0% {
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+50% {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+100% {
+    opacity: 1;
+    transform: scale(1);
+}
+
+}
+
+@keyframes welcomeParticle {
+
+0% {
+    transform: translateY(0);
+    opacity: 0.4;
+}
+
+50% {
+    transform: translateY(-7px);
+    opacity: 1;
+}
+
+100% {
+    transform: translateY(0);
+    opacity: 0.4;
+}
+
+}
+
+/* =========================================
+TRANSICIÓN
+========================================= */
+
+#fade-screen {
+
+position: fixed;
+
+inset: 0;
+
+background: #000;
+
+opacity: 0;
+
+pointer-events: none;
+
+z-index: 100;
+
+transition:
+    opacity 1.5s ease;
+
+}
+
+#fade-screen.active {
+opacity: 1;
+}
+
+/* =========================================
+OCULTAR
+========================================= */
+
+.hidden {
+display: none !important;
+}
+
+/* =========================================
+CELULAR
+========================================= */
+
+@media (max-width: 600px) {
+
+.loading-container {
+    padding: 20px;
+}
+
+.minecraft-button {
+
+    width: 90%;
+
+    min-width: 0;
+
+    font-size: 16px;
+
+    padding: 14px 15px;
+}
+
+.progress-box {
+    height: 30px;
+}
+
+.name-box {
+    padding: 25px 18px;
+}
+
+.welcome-message {
+    gap: 10px;
+}
+
+.welcome-particle {
+    font-size: 18px;
+}
+
+}
+
+/* =========================================
+   CAJA PARA EL NOMBRE
+========================================= */
+
+.name-box {
+    width: min(90vw, 390px);
+    margin: 15px auto 25px;
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            rgba(30,30,30,.96),
+            rgba(18,18,18,.96)
+        );
+
+    border: 4px solid #222;
+
+    box-shadow:
+        inset 3px 3px rgba(255,255,255,.12),
+        inset -3px -3px rgba(0,0,0,.5),
+        6px 6px #000;
+}
+
+.name-title {
+    color: #ffff55;
+    font-size: 14px;
+    font-weight: bold;
+
+    text-shadow:
+        2px 2px #000;
+
+    margin-bottom: 8px;
+}
+
+.name-subtitle {
+    color: #ddd;
+    font-size: 13px;
+    margin-bottom: 13px;
+}
+
+#player-name {
+    width: 100%;
+    height: 48px;
+
+    padding: 10px;
+
+    background: #151515;
+
+    border: 3px solid #555;
+
+    color: white;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    text-align: center;
+
+    outline: none;
+
+    box-shadow:
+        inset 3px 3px #080808,
+        inset -2px -2px #333;
+}
+
+#player-name::placeholder {
+    color: #777;
+}
+
+#player-name:focus {
+    border-color: #8b8b8b;
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.1),
+        inset 3px 3px #080808;
+}
+
+#name-error {
+    display: none;
+
+    margin-top: 8px;
+
+    color: #ff5555;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px #000;
+}
+
+#name-error.show {
+    display: block;
+}
+
+
+/* =========================================
+   BOTÓN DESACTIVADO
+========================================= */
+
+.minecraft-button.disabled {
+    opacity: .45;
+    filter: grayscale(.8);
+}
+
+
+/* =========================================
+   PEQUEÑO EFECTO AL ESCRIBIR
+========================================= */
+
+.name-box.name-ok {
+    border-color: #628d3b;
+}
+
+@media (max-width: 600px) {
+
+    .name-box {
+        margin-top: 10px;
+        padding: 15px;
+    }
+
+    #player-name {
+        height: 46px;
+    }
+}

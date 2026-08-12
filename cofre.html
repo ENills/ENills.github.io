@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080504"
+    >
+
+    <title>El Cofre</title>
+
+    <link
+        rel="stylesheet"
+        href="cofre.css"
+    >
+<audio id="chest-sound" src="Efectos/Cofre.mp3" preload="auto"></audio>
+</head>
+
+
+<body>
+
+<main id="scene">
+
+    <!-- FONDO -->
+
+    <div class="background"></div>
+
+    <div class="ambient-light"></div>
+
+    <div class="vignette"></div>
+
+    <div id="particles"></div>
+
+
+    <!-- MENSAJE INICIAL -->
+
+    <div
+        id="openingMessage"
+        class="opening-message"
+    >
+
+        <div class="opening-sparkle">
+            ✦
+        </div>
+
+        <div class="opening-title">
+            ABRIR COFRE
+        </div>
+
+        <div class="opening-subtitle">
+            Toca para comenzar
+        </div>
+
+        <div class="opening-line"></div>
+
+    </div>
+
+
+    <!-- COFRE -->
+
+    <div
+        id="chest"
+        class="chest"
+    >
+
+        <!-- TAPA -->
+
+        <div class="chest-lid">
+
+            <div class="lid-wood"></div>
+
+            <div class="metal-band band-left"></div>
+
+            <div class="metal-band band-right"></div>
+
+        </div>
+
+
+        <!-- LUZ INTERIOR -->
+
+        <div class="inside-light"></div>
+
+
+        <!-- CUERPO -->
+
+        <div class="chest-body">
+
+            <div class="body-wood"></div>
+
+            <!-- CERRADURA -->
+
+            <div class="lock">
+
+                <div class="lock-plate"></div>
+
+                <div class="lock-hole"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="chest-shadow"></div>
+
+    </div>
+
+
+    <!-- LIBRO CERRADO -->
+
+    <div
+        id="bookContainer"
+        class="book-container"
+    >
+
+        <div class="closed-book">
+
+            <div class="closed-book-cover">
+
+                <div class="closed-book-border">
+
+                    <div class="closed-book-symbol">
+                        ✦
+                    </div>
+
+                    <div class="closed-book-title">
+                        BOOK
+                    </div>
+
+                    <div class="closed-book-symbol">
+                        ✦
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="closed-book-pages"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTÓN ABRIR LIBRO -->
+
+    <button
+        id="openBookButton"
+        class="open-book-button"
+    >
+
+        📖
+        <span>ABRIR LIBRO</span>
+
+    </button>
+
+
+    <!-- LIBRO ABIERTO -->
+
+    <section
+        id="book"
+        class="book"
+    >
+
+        <div class="book-shadow"></div>
+
+
+        <!-- IZQUIERDA -->
+
+        <div class="book-page left-page">
+
+            <div class="page-paper">
+
+                <div class="page-number">
+                    I
+                </div>
+
+                <div class="page-decoration top-decoration">
+                    ✦
+                </div>
+
+                <div
+                    id="leftText"
+                    class="page-text"
+                ></div>
+
+                <div class="page-decoration bottom-decoration">
+                    ✦
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CENTRO -->
+
+        <div class="book-spine"></div>
+
+
+        <!-- DERECHA -->
+
+        <div class="book-page right-page">
+
+            <div class="page-paper">
+
+                <div class="page-number">
+                    II
+                </div>
+
+                <div class="page-decoration top-decoration">
+                    ✦
+                </div>
+
+                <div
+                    id="rightText"
+                    class="page-text"
+                ></div>
+
+                <div class="page-decoration bottom-decoration">
+                    ✦
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTROLES -->
+
+    <div
+        id="pageControls"
+        class="page-controls"
+    >
+
+        <button
+            id="previousPage"
+            class="page-button"
+        >
+            ‹
+        </button>
+
+        <div
+            id="pageIndicator"
+            class="page-indicator"
+        >
+            1 - 2
+        </div>
+
+        <button
+            id="nextPage"
+            class="page-button"
+        >
+            ›
+        </button>
+
+    </div>
+
+
+    <!-- MENSAJE FINAL -->
+
+    <div
+        id="bookHint"
+        class="book-hint"
+    >
+        ✦ El mensaje ha sido revelado ✦
+    </div>
+
+
+    <!-- SONIDO -->
+
+    <button
+        id="soundButton"
+        class="sound-button"
+    >
+        🔊
+    </button>
+
+</main>
+
+
+<script src="cofre.js"></script>
+
+</body>
+
+</html>

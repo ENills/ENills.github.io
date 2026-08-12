@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo de Minecraft - Aventura</title>
+    <link rel="stylesheet" href="mundo.css">
+</head>
+<body>
+    <audio id="cave-music" src="Musica/cueva.mp3" loop></audio>
+    <audio id="click-sound" src="Efectos/Click.mp3"></audio>
+    <audio id="chest-sound" src="Efectos/Cofre.mp3"></audio>
+    <audio id="step-sound" src="Efectos/pasos.mp3"></audio>
+
+    <main id="scene-cave" class="scene active">
+        <div class="cave-container">
+            <div id="cave-instructions">
+                ¡Conduce al dragón hacia el cofre para descubrir la sorpresa de <span id="player-name-display">aventurero</span>! 🐉 F el dragon no salio bien
+            </div>
+            
+            <div id="game-board">
+                <div class="cave-light"></div>
+                <div class="stone-block stone-1"></div>
+                <div class="stone-block stone-2"></div>
+                <div class="stone-block stone-3"></div>
+                <div class="stone-block stone-4"></div>
+                <div class="stone-block stone-5"></div>
+                <div class="stone-block stone-6"></div>
+                
+                <div class="cave-decor stalactite-1"></div>
+                <div class="cave-decor stalactite-2"></div>
+                <div class="cave-decor stalactite-3"></div>
+
+                <div class="ground-rock rock-1"></div>
+                <div class="ground-rock rock-2"></div>
+                <div class="ground-rock rock-3"></div>
+
+                <div class="torch torch-left"><div class="torch-fire"></div></div>
+                <div class="torch torch-right"><div class="torch-fire"></div></div>
+                <div class="chain-hang"></div>
+
+                <div id="chest" class="closed">
+                    <div class="chest-lid"></div>
+                    <div class="chest-lock"></div>
+                </div>
+
+                <div id="player-avatar">
+                    <div class="little-dragon">
+                        <div class="dragon-head"><div class="dragon-eye eye-left"></div><div class="dragon-eye eye-right"></div></div>
+                        <div class="dragon-wing wing-left"></div>
+                        <div class="dragon-wing wing-right"></div>
+                        <div class="dragon-tail"></div>
+                        <div class="dragon-leg leg-front"></div>
+                        <div class="dragon-leg leg-back"></div>
+                    </div>
+                    <div class="rider">
+                        <div class="rider-head"></div>
+                        <div class="rider-body"></div>
+                        <div class="rider-arm arm-left"></div>
+                        <div class="rider-arm arm-right"></div>
+                        <div class="rider-leg leg-left"></div>
+                        <div class="rider-leg leg-right"></div>
+                    </div>
+                </div>
+
+                <button id="btn-open-chest" class="hidden minecraft-button">¡ABRIR COFRE!</button>
+                <div id="chest-tip" class="hidden">¡Acércate al cofre!</div>
+            </div>
+
+            <div class="control-pad">
+                <button id="btn-left" class="control-button">◀ <span>IZQUIERDA</span></button>
+                <button id="btn-right" class="control-button"><span>DERECHA</span> ▶</button>
+            </div>
+            <div class="controls-hint">← → / A D para moverte</div>
+        </div>
+    </main>
+    <script src="mundo.js"></script>
+</body>
+</html>

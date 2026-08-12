@@ -1,0 +1,1443 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+html,
+body {
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+
+body {
+background: #050505;
+color: white;
+font-family: "Courier New", monospace;
+}
+
+.scene {
+position: fixed;
+inset: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+
+background:
+    radial-gradient(
+        ellipse at center,
+        #342b22 0%,
+        #1b1612 38%,
+        #0a0807 75%,
+        #000 100%
+    );
+
+overflow: hidden;
+
+}
+
+.scene::before {
+content: "";
+position: absolute;
+inset: 0;
+
+background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+
+background-size: 8px 8px;
+pointer-events: none;
+z-index: 1;
+
+}
+
+.cave-container {
+position: relative;
+z-index: 5;
+width: min(94%, 720px);
+text-align: center;
+padding: 15px;
+}
+
+#cave-instructions {
+margin-bottom: 16px;
+padding: 8px 12px;
+
+font-size: clamp(12px, 3.5vw, 16px);
+color: #ffff55;
+font-weight: bold;
+line-height: 1.5;
+
+text-shadow:
+    2px 2px #000,
+    0 0 4px #000;
+
+}
+
+#player-name-display {
+color: #fff;
+
+text-shadow:
+    2px 2px #000,
+    0 0 5px rgba(255,255,255,.3);
+
+}
+
+/* =========================================================
+CUEVA
+========================================================= */
+
+#game-board {
+position: relative;
+width: 100%;
+height: clamp(260px, 55vw, 360px);
+overflow: hidden;
+
+background:
+    radial-gradient(
+        ellipse at 50% 55%,
+        rgba(100,75,50,.18),
+        transparent 55%
+    ),
+    linear-gradient(
+        rgba(0,0,0,.12),
+        rgba(0,0,0,.45)
+    ),
+    repeating-linear-gradient(
+        0deg,
+        #28231f 0px,
+        #28231f 31px,
+        #211d19 31px,
+        #211d19 34px
+    );
+
+border: 7px solid #171513;
+
+box-shadow:
+    inset 0 0 45px rgba(0,0,0,.98),
+    inset 0 -35px 35px rgba(0,0,0,.65),
+    7px 7px 0 #000;
+
+}
+
+/* Oscuridad adicional de la cueva */
+
+#game-board::before {
+content: "";
+position: absolute;
+inset: 0;
+
+background:
+    radial-gradient(
+        ellipse at 50% 100%,
+        rgba(0,0,0,.15),
+        rgba(0,0,0,.5) 80%
+    );
+
+pointer-events: none;
+z-index: 2;
+
+}
+
+/* Suelo */
+
+#game-board::after {
+content: "";
+position: absolute;
+
+left: 0;
+right: 0;
+bottom: 0;
+
+height: 42px;
+
+background:
+    repeating-linear-gradient(
+        90deg,
+        #171513 0px,
+        #24201c 18px,
+        #131210 36px
+    );
+
+border-top: 4px solid #0b0a09;
+
+box-shadow:
+    inset 0 8px 12px rgba(0,0,0,.55);
+
+z-index: 3;
+
+}
+
+.cave-light {
+position: absolute;
+inset: 0;
+pointer-events: none;
+z-index: 4;
+
+background:
+    radial-gradient(
+        circle at 13% 48%,
+        rgba(255,170,45,.23),
+        transparent 19%
+    ),
+    radial-gradient(
+        circle at 87% 48%,
+        rgba(255,170,45,.18),
+        transparent 19%
+    );
+
+}
+
+/* =========================================================
+PIEDRAS
+========================================================= */
+
+.stone-block {
+position: absolute;
+
+width: 55px;
+height: 35px;
+
+background:
+    linear-gradient(
+        135deg,
+        #514b45,
+        #302c28 55%,
+        #211e1b
+    );
+
+border: 2px solid #211e1b;
+
+box-shadow:
+    inset 3px 3px rgba(255,255,255,.06),
+    3px 3px 0 rgba(0,0,0,.4);
+
+opacity: .85;
+
+z-index: 5;
+
+}
+
+.stone-1 {
+top: 20px;
+left: 18px;
+}
+
+.stone-2 {
+top: 45px;
+left: 130px;
+}
+
+.stone-3 {
+top: 18px;
+right: 120px;
+}
+
+.stone-4 {
+top: 70px;
+right: 25px;
+}
+
+.stone-5 {
+bottom: 65px;
+left: 90px;
+}
+
+.stone-6 {
+bottom: 80px;
+right: 180px;
+}
+
+/* =========================================================
+ESTALACTITAS
+========================================================= */
+
+.cave-decor {
+position: absolute;
+top: 0;
+
+background:
+    linear-gradient(
+        90deg,
+        #292521,
+        #514a43 45%,
+        #211e1b
+    );
+
+border-left: 3px solid #171513;
+border-right: 3px solid #171513;
+
+clip-path: polygon(
+    0 0,
+    100% 0,
+    75% 45%,
+    50% 100%,
+    25% 45%
+);
+
+box-shadow: 0 8px 15px rgba(0,0,0,.6);
+
+z-index: 6;
+
+}
+
+.stalactite-1 {
+left: 13%;
+width: 48px;
+height: 55px;
+}
+
+.stalactite-2 {
+left: 43%;
+width: 62px;
+height: 70px;
+}
+
+.stalactite-3 {
+right: 12%;
+width: 42px;
+height: 48px;
+}
+
+/* =========================================================
+ROCAS DEL SUELO
+========================================================= */
+
+.ground-rock {
+position: absolute;
+bottom: 23px;
+
+background:
+    linear-gradient(
+        135deg,
+        #4a4540,
+        #24211e
+    );
+
+border: 3px solid #171513;
+
+box-shadow:
+    inset 4px 4px rgba(255,255,255,.06),
+    4px 4px 0 rgba(0,0,0,.5);
+
+clip-path: polygon(
+    0 100%,
+    12% 45%,
+    35% 20%,
+    65% 28%,
+    100% 60%,
+    90% 100%
+);
+
+z-index: 7;
+
+}
+
+.rock-1 {
+left: 9%;
+width: 55px;
+height: 35px;
+}
+
+.rock-2 {
+left: 57%;
+width: 65px;
+height: 32px;
+}
+
+.rock-3 {
+right: 7%;
+width: 48px;
+height: 30px;
+}
+
+/* =========================================================
+ANTORCHAS
+========================================================= */
+
+.torch {
+position: absolute;
+
+top: 105px;
+
+width: 12px;
+height: 31px;
+
+background:
+    linear-gradient(
+        90deg,
+        #4c2a12,
+        #8b5424,
+        #3e220e
+    );
+
+border: 2px solid #28170b;
+
+box-shadow:
+    3px 3px #000,
+    0 0 18px rgba(255,130,0,.2);
+
+z-index: 10;
+
+}
+
+.torch-left {
+left: 42px;
+}
+
+.torch-right {
+right: 42px;
+}
+
+.torch-fire {
+position: absolute;
+
+top: -19px;
+left: -5px;
+
+width: 17px;
+height: 21px;
+
+background:
+    linear-gradient(
+        135deg,
+        #ffff88,
+        #ffb300 45%,
+        #ff5a00
+    );
+
+clip-path: polygon(
+    50% 0,
+    75% 30%,
+    100% 45%,
+    70% 100%,
+    25% 100%,
+    0 55%,
+    35% 30%
+);
+
+box-shadow:
+    0 0 14px #ff7200,
+    0 0 24px rgba(255,100,0,.5);
+
+animation: fireFlicker .35s infinite alternate;
+
+}
+
+@keyframes fireFlicker {
+from {
+transform: scale(.9) rotate(-2deg);
+filter: brightness(.9);
+}
+
+to {
+    transform: scale(1.08) rotate(2deg);
+    filter: brightness(1.3);
+}
+
+}
+
+.chain-hang {
+position: absolute;
+
+top: 0;
+left: 68%;
+
+width: 5px;
+height: 78px;
+
+background:
+    repeating-linear-gradient(
+        0deg,
+        #777 0px,
+        #777 5px,
+        #222 5px,
+        #222 10px
+    );
+
+border: 1px solid #111;
+
+z-index: 8;
+
+}
+
+/* =========================================================
+COFRE
+========================================================= */
+
+#chest {
+position: absolute;
+
+right: 45px;
+bottom: 25px;
+
+width: 72px;
+height: 54px;
+
+background:
+    linear-gradient(
+        #a66a2c,
+        #704018
+    );
+
+border: 4px solid #2b180b;
+
+box-shadow:
+    4px 4px 0 #000,
+    inset 4px 4px rgba(255,255,255,.13);
+
+z-index: 20;
+
+}
+
+.chest-lid {
+position: absolute;
+
+left: -4px;
+top: -8px;
+
+width: 72px;
+height: 17px;
+
+background:
+    linear-gradient(
+        #b97935,
+        #814a20
+    );
+
+border: 4px solid #2b180b;
+
+}
+
+.chest-lock {
+position: absolute;
+
+left: 26px;
+top: 22px;
+
+width: 14px;
+height: 17px;
+
+background: #e3c13c;
+border: 3px solid #6b5314;
+
+z-index: 3;
+
+}
+
+/* =========================================================
+DRAGÓN - FURIA NOCTURNA
+========================================================= */
+
+#player-avatar {
+position: absolute;
+
+left: 20px;
+bottom: 27px;
+
+width: 125px;
+height: 105px;
+
+transition: left .15s ease-out;
+
+z-index: 30;
+
+}
+
+/* El cuerpo */
+
+.little-dragon {
+position: absolute;
+
+left: 4px;
+bottom: 0;
+
+width: 108px;
+height: 65px;
+
+filter:
+    drop-shadow(4px 5px 0 #000)
+    drop-shadow(0 0 4px rgba(0,0,0,.6));
+
+}
+
+/* CUERPO */
+
+.little-dragon::before {
+content: "";
+
+position: absolute;
+
+left: 14px;
+bottom: 8px;
+
+width: 74px;
+height: 39px;
+
+background:
+    linear-gradient(
+        145deg,
+        #3e3e4b 0%,
+        #252531 42%,
+        #0b0b10 100%
+    );
+
+border: 4px solid #07070b;
+
+border-radius:
+    48% 58% 38% 48% /
+    58% 65% 38% 45%;
+
+box-shadow:
+    inset 6px 5px rgba(255,255,255,.08),
+    inset -7px -7px rgba(0,0,0,.45),
+    3px 4px 0 #000;
+
+z-index: 2;
+
+}
+
+/* Pequeñas escamas */
+
+.little-dragon::after {
+content: "";
+
+position: absolute;
+
+left: 28px;
+bottom: 22px;
+
+width: 47px;
+height: 13px;
+
+background:
+    radial-gradient(
+        circle at 20% 50%,
+        #60606d 0 3px,
+        transparent 4px
+    ),
+    radial-gradient(
+        circle at 50% 50%,
+        #555562 0 3px,
+        transparent 4px
+    ),
+    radial-gradient(
+        circle at 80% 50%,
+        #555562 0 3px,
+        transparent 4px
+    );
+
+opacity: .55;
+
+z-index: 3;
+
+}
+
+/* CABEZA */
+
+.dragon-head {
+position: absolute;
+
+left: 69px;
+top: 2px;
+
+width: 39px;
+height: 36px;
+
+background:
+    linear-gradient(
+        145deg,
+        #555563 0%,
+        #292932 48%,
+        #0d0d13 100%
+    );
+
+border: 4px solid #07070b;
+
+border-radius:
+    48% 38% 43% 52%;
+
+box-shadow:
+    inset 5px 4px rgba(255,255,255,.09),
+    3px 4px 0 #000;
+
+z-index: 8;
+
+}
+
+/* MORRO */
+
+.dragon-head::after {
+content: "";
+
+position: absolute;
+
+right: -16px;
+top: 14px;
+
+width: 19px;
+height: 14px;
+
+background:
+    linear-gradient(
+        #303039,
+        #101016
+    );
+
+border: 3px solid #07070b;
+
+border-radius:
+    35% 60% 55% 35%;
+
+box-shadow:
+    3px 3px 0 #000;
+
+}
+
+/* NARIZ */
+
+.dragon-head::before {
+content: "";
+
+position: absolute;
+
+right: -14px;
+top: 19px;
+
+width: 6px;
+height: 5px;
+
+background: #030305;
+
+border-radius: 50%;
+
+}
+
+/* OJOS AZULES */
+
+.dragon-eye {
+position: absolute;
+
+top: 8px;
+
+width: 9px;
+height: 10px;
+
+background:
+    radial-gradient(
+        circle,
+        #ffffff 0 15%,
+        #62ddff 18% 50%,
+        #008ed1 55%,
+        #003c63 100%
+    );
+
+border: 2px solid #06121a;
+
+box-shadow:
+    0 0 7px #00bfff,
+    0 0 13px rgba(0,180,255,.75);
+
+border-radius: 2px;
+
+z-index: 9;
+
+}
+
+.eye-left {
+left: 6px;
+}
+
+.eye-right {
+right: 6px;
+}
+
+/* CUERNOS */
+
+.dragon-head .eye-left::before,
+.dragon-head .eye-right::before {
+content: "";
+
+position: absolute;
+
+top: -10px;
+
+width: 7px;
+height: 12px;
+
+background:
+    linear-gradient(
+        135deg,
+        #c4c4ca,
+        #55555e
+    );
+
+border: 2px solid #08080b;
+
+clip-path: polygon(
+    50% 0,
+    100% 100%,
+    0 100%
+);
+
+}
+
+.dragon-head .eye-left::before {
+left: -3px;
+}
+
+.dragon-head .eye-right::before {
+right: -3px;
+}
+
+/* =========================================================
+ALAS GRANDES
+========================================================= */
+
+.dragon-wing {
+position: absolute;
+
+top: -12px;
+
+width: 45px;
+height: 49px;
+
+background:
+    linear-gradient(
+        145deg,
+        #3b3b48,
+        #181820 65%,
+        #07070c
+    );
+
+border: 4px solid #07070b;
+
+clip-path: polygon(
+    50% 0,
+    100% 22%,
+    78% 39%,
+    100% 60%,
+    66% 55%,
+    74% 88%,
+    45% 65%,
+    25% 100%,
+    22% 58%,
+    0 75%,
+    15% 35%,
+    4% 17%
+);
+
+box-shadow:
+    3px 4px 0 #000;
+
+z-index: 4;
+
+}
+
+/* Membrana */
+
+.dragon-wing::after {
+content: "";
+
+position: absolute;
+inset: 8px;
+
+background:
+    linear-gradient(
+        135deg,
+        rgba(110,110,130,.35),
+        rgba(0,0,0,.1)
+    );
+
+clip-path: polygon(
+    50% 0,
+    100% 30%,
+    68% 48%,
+    75% 82%,
+    45% 60%,
+    27% 88%,
+    25% 50%,
+    8% 67%,
+    20% 35%
+);
+
+}
+
+.wing-left {
+left: 9px;
+transform: rotate(-8deg);
+}
+
+.wing-right {
+left: 43px;
+transform: scaleX(-1) rotate(-8deg);
+}
+
+/* =========================================================
+COLA DE FURIA NOCTURNA
+========================================================= */
+
+.dragon-tail {
+position: absolute;
+
+left: -15px;
+bottom: 15px;
+
+width: 47px;
+height: 19px;
+
+background:
+    linear-gradient(
+        135deg,
+        #292933,
+        #0d0d12
+    );
+
+border: 4px solid #07070b;
+
+border-radius:
+    60% 20% 20% 60%;
+
+transform:
+    rotate(-19deg)
+    skewX(-12deg);
+
+box-shadow:
+    3px 3px 0 #000;
+
+z-index: 1;
+
+}
+
+/* Punta característica */
+
+.dragon-tail::after {
+content: "";
+
+position: absolute;
+
+left: -18px;
+top: -7px;
+
+width: 24px;
+height: 24px;
+
+background: #202029;
+
+border: 4px solid #07070b;
+
+clip-path: polygon(
+    100% 50%,
+    0 0,
+    25% 50%,
+    0 100%
+);
+
+}
+
+/* =========================================================
+PATAS DEL DRAGÓN
+========================================================= */
+
+.dragon-leg {
+position: absolute;
+
+bottom: -2px;
+
+width: 15px;
+height: 19px;
+
+background:
+    linear-gradient(
+        90deg,
+        #121219,
+        #393943,
+        #101016
+    );
+
+border: 3px solid #07070b;
+
+border-radius: 3px 3px 5px 5px;
+
+box-shadow:
+    2px 3px 0 #000;
+
+z-index: 5;
+
+}
+
+.dragon-leg::after {
+content: "";
+
+position: absolute;
+
+left: -2px;
+bottom: -5px;
+
+width: 16px;
+height: 6px;
+
+background:
+    linear-gradient(
+        90deg,
+        #c8c8cf 0 18%,
+        transparent 18% 30%,
+        #c8c8cf 30% 48%,
+        transparent 48% 60%,
+        #c8c8cf 60% 78%,
+        transparent 78%
+    );
+
+border-radius: 2px;
+
+}
+
+.leg-front {
+left: 57px;
+}
+
+.leg-back {
+left: 27px;
+}
+
+/* =========================================================
+STEVE MONTADO
+========================================================= */
+
+.rider {
+position: absolute;
+
+/*
+   Steve ahora está más bajo y centrado.
+   Esto hace que parezca que está sentado
+   sobre el lomo del dragón.
+*/
+
+left: 39px;
+top: 5px;
+
+width: 48px;
+height: 67px;
+
+z-index: 15;
+
+filter:
+    drop-shadow(3px 4px 0 #000);
+
+}
+
+/* CABEZA */
+
+.rider-head {
+position: absolute;
+
+left: 10px;
+top: 0;
+
+width: 27px;
+height: 27px;
+
+background:
+    linear-gradient(
+        135deg,
+        #e0a477 0%,
+        #c27d54 55%,
+        #9b5c3e 100%
+    );
+
+border: 3px solid #111;
+
+box-shadow:
+    inset 3px 3px rgba(255,255,255,.13),
+    2px 3px #000;
+
+image-rendering: pixelated;
+
+z-index: 8;
+
+}
+
+/* PELO */
+
+.rider-head::before {
+content: "";
+
+position: absolute;
+
+left: -3px;
+top: -3px;
+
+width: 27px;
+height: 9px;
+
+background:
+    linear-gradient(
+        #513523,
+        #2b1b13
+    );
+
+border: 3px solid #111;
+
+box-shadow:
+    inset 3px 2px rgba(255,255,255,.08);
+
+}
+
+/* CARA */
+
+.rider-head::after {
+content: "";
+
+position: absolute;
+
+left: 5px;
+top: 12px;
+
+width: 17px;
+height: 8px;
+
+background:
+    linear-gradient(
+        90deg,
+        #5b392b 0 15%,
+        transparent 15% 28%,
+        #111 28% 43%,
+        transparent 43% 57%,
+        #111 57% 72%,
+        transparent 72% 85%,
+        #6d4030 85%
+    );
+
+}
+
+/* CUERPO */
+
+.rider-body {
+position: absolute;
+
+left: 11px;
+top: 25px;
+
+width: 25px;
+height: 27px;
+
+background:
+    linear-gradient(
+        90deg,
+        #245d96 0%,
+        #3c8bd0 50%,
+        #245d96 100%
+    );
+
+border: 3px solid #111;
+
+box-shadow:
+    inset 3px 3px rgba(255,255,255,.12),
+    inset -3px -3px rgba(0,0,0,.2),
+    2px 3px #000;
+
+z-index: 7;
+
+}
+
+/* CINTURÓN */
+
+.rider-body::after {
+content: "";
+
+position: absolute;
+
+left: 0;
+bottom: 5px;
+
+width: 100%;
+height: 4px;
+
+background: #222b32;
+border-top: 2px solid #111;
+
+}
+
+/* =========================================================
+BRAZOS
+========================================================= */
+
+.rider-arm {
+position: absolute;
+
+top: 26px;
+
+width: 11px;
+height: 27px;
+
+background:
+    linear-gradient(
+        90deg,
+        #235987,
+        #3984c4,
+        #235987
+    );
+
+border: 3px solid #111;
+
+border-radius: 2px;
+
+box-shadow:
+    2px 3px #000;
+
+z-index: 6;
+
+}
+
+/*
+Los brazos bajan un poco para que parezca
+que Steve controla al dragón.
+*/
+
+.arm-left {
+left: 1px;
+transform: rotate(18deg);
+}
+
+.arm-right {
+right: 1px;
+transform: rotate(-18deg);
+}
+
+.arm-left::after,
+.arm-right::after {
+content: "";
+
+position: absolute;
+
+bottom: -5px;
+left: 0;
+
+width: 8px;
+height: 8px;
+
+background: #c98b61;
+
+border: 2px solid #111;
+
+}
+
+/* =========================================================
+PIERNAS DE STEVE A LOS LADOS DEL DRAGÓN
+========================================================= */
+
+.rider-leg {
+position: absolute;
+
+top: 47px;
+
+width: 12px;
+height: 21px;
+
+background:
+    linear-gradient(
+        90deg,
+        #33343a,
+        #555861,
+        #292a30
+    );
+
+border: 3px solid #111;
+
+border-radius: 2px;
+
+box-shadow:
+    2px 3px #000;
+
+z-index: 5;
+
+}
+
+/*
+Separadas ligeramente hacia los lados.
+Así Steve parece estar sentado sobre el lomo
+en lugar de simplemente estar flotando encima.
+*/
+
+.leg-left {
+left: 5px;
+transform: rotate(18deg);
+}
+
+.leg-right {
+left: 28px;
+transform: rotate(-18deg);
+}
+
+/* =========================================================
+BOTÓN COFRE
+========================================================= */
+
+#btn-open-chest {
+position: absolute;
+
+bottom: 15px;
+left: 50%;
+
+transform: translateX(-50%);
+
+padding: 10px 20px;
+
+font-size: 14px;
+
+z-index: 100;
+
+}
+
+#chest-tip {
+position: absolute;
+
+bottom: 60px;
+left: 50%;
+
+transform: translateX(-50%);
+
+width: max-content;
+
+padding: 7px 10px;
+
+background: rgba(0,0,0,.94);
+
+border: 2px solid #555;
+
+color: #ffff55;
+
+font-size: 11px;
+font-weight: bold;
+
+text-shadow: 1px 1px #000;
+
+z-index: 50;
+
+}
+
+/* =========================================================
+BOTONES
+========================================================= */
+
+.control-pad {
+display: flex;
+justify-content: center;
+align-items: center;
+
+gap: 22px;
+
+margin-top: 20px;
+
+}
+
+.control-button {
+flex: 1;
+
+max-width: 230px;
+min-height: 58px;
+
+padding: 12px 15px;
+
+background:
+    linear-gradient(
+        #777,
+        #555
+    );
+
+border: 4px solid #222;
+
+color: white;
+
+font-family: "Courier New", monospace;
+font-size: 15px;
+font-weight: bold;
+
+cursor: pointer;
+
+text-shadow:
+    2px 2px #222;
+
+box-shadow:
+    inset 0 3px rgba(255,255,255,.2),
+    inset 0 -4px rgba(0,0,0,.25),
+    5px 5px #000;
+
+transition:
+    transform .1s,
+    filter .1s;
+
+}
+
+.control-button:active {
+transform: translate(3px,3px);
+}
+
+.minecraft-button {
+background:
+linear-gradient(
+#777,
+#555
+);
+
+border: 4px solid #222;
+
+color: white;
+
+font-family: "Courier New", monospace;
+font-weight: bold;
+
+cursor: pointer;
+
+text-shadow:
+    2px 2px #222;
+
+box-shadow:
+    inset 0 3px rgba(255,255,255,.2),
+    4px 4px #000;
+
+}
+
+.controls-hint {
+margin-top: 10px;
+
+color: #888;
+
+font-size: 11px;
+
+text-shadow:
+    1px 1px #000;
+
+}
+
+.hidden {
+display: none !important;
+}
+
+/* =========================================================
+MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+.cave-container {
+    width: 96%;
+    padding: 8px;
+}
+
+#game-board {
+    height: 285px;
+}
+
+.control-button {
+    min-height: 55px;
+    font-size: 13px;
+}
+
+#player-avatar {
+    transform: scale(.92);
+    transform-origin: bottom left;
+}
+
+}

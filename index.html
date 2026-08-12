@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Una sorpresa...</title>
+
+<link rel="stylesheet" href="inicio.css">
+
+</head><body><!-- AUDIO -->
+<audio id="bg-music" src="Musica/principal.mp3" loop></audio>
+<audio id="click-sound" src="Efectos/Click.mp3"></audio>
+
+
+<!-- PARTÍCULAS -->
+<div id="particles"></div>
+
+
+<!-- =================================
+     MENÚ PRINCIPAL
+================================== -->
+
+<main id="scene-menu" class="scene active">
+
+    <div class="loading-container">
+
+        <div class="minecraft-logo">
+            MINECRAFT
+        </div>
+
+        <div id="splash-text">
+            ¡Una sorpresa se está cargando!
+        </div>
+
+        <button id="start-button" class="minecraft-button">
+            JUGAR MUNDO
+        </button>
+
+    </div>
+
+</main>
+
+
+<!-- =================================
+     GENERANDO MUNDO
+================================== -->
+
+<main id="scene-loading" class="scene hidden">
+
+    <div class="loading-container">
+
+        <div class="minecraft-logo small">
+            MINECRAFT
+        </div>
+
+        <h1 id="loading-title">
+            GENERANDO MUNDO...
+        </h1>
+
+        <p id="loading-message">
+            Preparando terreno...
+        </p>
+
+
+        <!-- BARRA DE PROGRESO -->
+
+        <div class="progress-box">
+
+            <div id="progress-bar">
+                <div class="progress-shine"></div>
+            </div>
+
+        </div>
+
+
+        <div id="progress-text">
+            0%
+        </div>
+
+
+        <!-- BUSCANDO JUGADOR -->
+
+        <div id="player-search" class="player-search hidden">
+
+            <span class="search-icon">✦</span>
+
+            <span id="player-search-text">
+                Buscando jugador...
+            </span>
+
+        </div>
+
+
+        <!-- BOTÓN FINAL -->
+
+        <button id="enter-button" class="minecraft-button hidden">
+            ENTRAR AL MUNDO
+        </button>
+
+    </div>
+
+
+    <!-- =================================
+         PANTALLA PARA ELEGIR NOMBRE
+    ================================== -->
+
+    <div id="name-screen" class="overlay hidden">
+
+        <div class="name-box">
+
+            <div class="name-icon">
+                ✦
+            </div>
+
+            <h2>
+                ¿Escribe tu nombre?
+            </h2>
+
+            <p>
+                Elige el nombre con el que entrarás a este mundo creado para ti.
+            </p>
+
+            <input
+                type="text"
+                id="player-name"
+                maxlength="20"
+                autocomplete="off"
+                placeholder="Escribe tu nombre..."
+            >
+
+            <button id="continue-button" class="minecraft-button">
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         MENSAJE DE BIENVENIDA
+    ================================== -->
+
+    <div id="welcome-screen" class="welcome-screen hidden">
+
+        <div class="welcome-message">
+
+            <div class="welcome-particle">
+                ✦
+            </div>
+
+            <h1 id="welcome-text">
+                ¡Bienvenida a tu mundo!
+            </h1>
+
+            <div class="welcome-particle">
+                ✦
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRANSICIÓN -->
+
+    <div id="fade-screen"></div>
+
+</main>
+
+
+<script src="inicio.js"></script>
+
+</body></html>
